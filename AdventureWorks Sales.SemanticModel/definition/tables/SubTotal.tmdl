@@ -1,0 +1,65 @@
+table SubTotal
+	lineageTag: ecaf8fb0-750f-4879-ad6b-813a09dd86e4
+
+	column State-Province
+		lineageTag: 5a075a36-1a74-427d-8442-de8e520ae3df
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer[State-Province]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'sum of Amount'
+		lineageTag: 989d3b75-971f-4824-8a1c-0ccd3fd558e9
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [sum of Amount]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Is yes or No'
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 80464683-a6c1-4c76-81cc-575217102dcd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Is yes or No]
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		lineageTag: a1d14148-133a-4dd0-a52c-ed5b4b2e49a6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer[City]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is City'
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 74cf80f8-d027-4fa2-82de-0021525a5a28
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [is city]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SubTotal = calculated
+		mode: import
+		source = ```
+				
+				SUMMARIZECOLUMNS(
+				    ROLLUPADDISSUBTOTAL(
+				        Customer[State-Province], 
+				        "Is yes or No",
+				        Customer[City], "Is City"),
+				    "sum of Amount", SUM(Sales[Sales Amount])
+				)
+				  
+				
+				    
+				```
+
+	annotation PBI_Id = c0b04480bcde4b87bf23ef8840c5e41c
+

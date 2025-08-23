@@ -1,0 +1,57 @@
+table 'tab GRPBY nested'
+	lineageTag: 87a81102-7b45-4e14-9099-229aeb9be1d0
+
+	column State-Province
+		lineageTag: c3c41ebe-daa4-4691-bbd4-e63bd41d08ef
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer[State-Province]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'total Amount'
+		lineageTag: dfb390dc-623a-476a-ac57-ab37c50f7ba5
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [total Amount]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'tab GRPBY nested' = calculated
+		mode: import
+		source = ```
+				
+				
+				VAR inn_groupby = 
+				GROUPBY(
+				     sales
+				     ,Customer[State-Province]
+				     ,"AVerage of Ammount"
+				     , AVERAGEX(
+				        CURRENTGROUP(), 
+				        Sales[Sales Amount]
+				     ))
+				
+				VAR summ =
+				--IF(NOT(ISBLANK(SELECTEDVALUE(Customer[State-Province]))),
+				     SUMMARIZECOLUMNS(
+				       Customer[State-Province],
+				       "total Amount",
+				       SUM(Sales[Sales Amount])
+				    
+				     )
+				
+				
+				RETURN
+				summ
+				
+				    
+				
+				
+				
+				```
+
+	annotation PBI_Id = f442c7a7f1f24c838f392c049085d9d7
+

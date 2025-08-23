@@ -1,0 +1,47 @@
+table 'sumaryTab grpby'
+	lineageTag: ab40bc11-1f19-4895-98ab-861b28f32746
+
+	column State-Province
+		lineageTag: 9b2c652a-91eb-4705-8988-a664567a93e3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer[State-Province]
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		lineageTag: e156ca0b-503c-4604-9b2b-b549520fdd60
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customer[City]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amount total'
+		lineageTag: 150fbec4-929e-43b1-a698-172e9b8be86d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Amount total]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'sumaryTab grpby' = calculated
+		mode: import
+		source =
+				
+				
+				CALCULATETABLE(
+				    SUMMARIZE(
+				    Sales,
+				    Customer[State-Province],
+				    Customer[City],
+				    "Amount total",
+				    SUM(Sales[Sales Amount])
+				    ),
+				    (Customer[State-Province]) = "Georgia"
+				)
+
+	annotation PBI_Id = e211d58ab2eb4baf84fcbf7b00ddb5a1
+
