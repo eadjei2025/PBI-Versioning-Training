@@ -20,6 +20,11 @@ table Sales
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure M = SUM(Sales[Sales Amount])
+		lineageTag: 60b8a070-2fd8-4449-a4b3-b7386b1f3184
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column SalesOrderLineKey
 		dataType: int64
 		isHidden
