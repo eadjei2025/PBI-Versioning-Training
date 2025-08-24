@@ -2,18 +2,18 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
   "name": "3a1aeaede6fc79fe5066",
   "position": {
-    "x": 841.82983425414363,
-    "y": 337.93885819521176,
+    "x": 506.9082872928177,
+    "y": 331.90423572744015,
     "z": 2000,
     "height": 364.0888888888889,
     "width": 424.43511356660525,
     "tabOrder": 3000
   },
   "visual": {
-    "visualType": "pivotTable",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Rows": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -26,8 +26,7 @@
                   "Property": "Category"
                 }
               },
-              "queryRef": "Product.Category",
-              "active": true
+              "queryRef": "Product.Category"
             },
             {
               "field": {
@@ -40,13 +39,8 @@
                   "Property": "Business Type"
                 }
               },
-              "queryRef": "Reseller.Business Type",
-              "active": true
-            }
-          ]
-        },
-        "Values": {
-          "projections": [
+              "queryRef": "Reseller.Business Type"
+            },
             {
               "field": {
                 "Aggregation": {
