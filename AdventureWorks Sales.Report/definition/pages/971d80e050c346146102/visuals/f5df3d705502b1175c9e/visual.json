@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "f5df3d705502b1175c9e",
+  "position": {
+    "x": 868.985635359116,
+    "y": 147.84825046040515,
+    "z": 1,
+    "height": 279.60417434008593,
+    "width": 279.60417434008593,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales"
+                    }
+                  },
+                  "Property": "M"
+                }
+              },
+              "queryRef": "Sales.M",
+              "nativeQueryRef": "M"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
